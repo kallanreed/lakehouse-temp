@@ -1,0 +1,10 @@
+{
+  "name": "lakehouse-temp",
+  "version": "1.0.0",
+  "description": "Temperature Logger for Lakehouse",
+  "author": "@kallanreed",
+  "license": "ISC",
+  "dependencies": {
+    "wrangler": "^3.34.2"
+  }
+}
