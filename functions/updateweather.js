@@ -20,8 +20,10 @@ export async function onRequest(context) {
   console.log('[LOG] Temp:' + temp);
   console.log('[LOG] Humi:' + humidity);
 
-  await data.put(date, JSON.stringify({ t: temp, h: humidity}),
-    { expirationTtl: 2592000 });  // 1 month
+  await data.put(date, "", {
+      metadata: { t: temp, h: humidity },
+      expirationTtl: 2592000  // 1 month
+    });
 
   return new Response('OK');
 }
