@@ -15,10 +15,23 @@
     <link rel="stylesheet" type="text/css" href="content/style.css" />
 
     <title>Lakehouse Temperature</title>
+
+    <script src="content/code.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 </head>
 
 <body>
-  <img src="/content/icon.png" alt="Site icon" />
+  <div>
+    <canvas id="tempChart"></canvas>
+  </div>
+
+  <script>
+    fetch("readweather")
+      .then(resp => resp.json())
+      .then(data => updateChart(data))
+      .catch(error => console.error('Error fetching data:', error));
+  </script>
 </body>
 
 </html>
