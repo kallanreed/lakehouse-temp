@@ -3,7 +3,8 @@ function updateChart(data) {
     const humidityChartElement = document.getElementById('humidityChart');
     data.sort((x, y) => x.d.localeCompare(y.d));
 
-    const labels = data.map(x => x.d);
+    // Use 'Z' to force parsing as UTC so conversion to local time works.
+    const labels = data.map(x => new Date(x.d + 'Z'));
     const tempData = data.map(x => x.t);
     const humidData = data.map(x => x.h);
 
