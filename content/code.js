@@ -1,5 +1,8 @@
 function updateChart(data) {
-    const ctx = document.getElementById('tempChart');
+    const tempChartElement = document.getElementById('tempChart');
+    const humidityChartElement = document.getElementById('humidityChart');
+    data.sort((x, y) => x.d.localeCompare(y.d));
+
     const labels = data.map(x => x.d);
     const tempData = data.map(x => x.t);
     const humidData = data.map(x => x.h);
@@ -8,11 +11,11 @@ function updateChart(data) {
     const chartColors = {
         Temp: 'rgb(244,91,105)',
         Humid: 'rgb(172, 193, 215)',
-        Lines: 'rgb(228, 253, 225)',
-        Background: 'rgb(107, 39, 55)'
+        Lables: 'rgb(228, 228, 225)',
+        Lines: 'rgba(228, 228, 225, 0.2)',
     };
 
-    new Chart(ctx, {
+    new Chart(tempChartElement, {
         type: 'line',
         data: {
             labels: labels,
@@ -21,7 +24,65 @@ function updateChart(data) {
                 data: tempData,
                 backgroundColor: color(chartColors.Temp).alpha(0.2).rgbString(),
                 borderColor: color(chartColors.Temp).rgbString(),
-            }, {
+            }]
+        },
+        options: {
+            plugins: {
+                title: {
+                    text: "Temperature",
+                    display: true,
+                    color: chartColors.Lables
+                },
+                legend: {
+                    display: false
+                },
+                decimation: {
+                    enabled: true,
+                    algorithm: 'lttb'
+                }
+            },
+            elements: {
+                point: {
+                    pointStyle: false
+                }
+            },
+            layout: {
+                padding: 10
+            },
+            scales: {
+                x: {
+                    grid: {
+                        color: [chartColors.Lines],
+                    },
+                    type: 'time',
+                    time: {
+                        unit: 'hour',
+                        displayFormats: {
+                            hour: "M/d HH"
+                        }
+                    },
+                    ticks: {
+                        color: chartColors.Lables,
+                    },
+                },
+                y: {
+                    grace: 5,
+                    grid: {
+                        color: [chartColors.Lines],
+                    },
+                    ticks: {
+                        color: chartColors.Lables,
+                    },
+                }
+            }
+        }
+    });
+
+    new Chart(humidityChartElement, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
                 label: 'Humidity',
                 data: humidData,
                 backgroundColor: color(chartColors.Humid).alpha(0.2).rgbString(),
@@ -29,28 +90,51 @@ function updateChart(data) {
             }]
         },
         options: {
+            plugins: {
+                title: {
+                    text: "Humidity",
+                    display: true,
+                    color: chartColors.Lables
+                },
+                legend: {
+                    display: false
+                },
+                decimation: {
+                    enabled: true,
+                    algorithm: 'lttb'
+                }
+            },
+            elements: {
+                point: {
+                    pointStyle: false
+                }
+            },
+            layout: {
+                padding: 10
+            },
             scales: {
                 x: {
-                    backgroundColor: chartColors.Background,
                     grid: {
                         color: [chartColors.Lines],
                     },
                     type: 'time',
                     time: {
-                        unit: 'hour'
+                        unit: 'hour',
+                        displayFormats: {
+                            hour: "M/d HH"
+                        }
                     },
                     ticks: {
-                        color: chartColors.Lines,
+                        color: chartColors.Lables,
                     },
                 },
                 y: {
-                    backgroundColor: chartColors.Background,
-                    beginAtZero: false,
+                    grace: 5,
                     grid: {
                         color: [chartColors.Lines],
                     },
                     ticks: {
-                        color: chartColors.Lines,
+                        color: chartColors.Lables,
                     },
                 }
             }
