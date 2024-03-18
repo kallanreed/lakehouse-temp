@@ -1,10 +1,11 @@
 export async function onRequest(context) {
   const data = context.env.TEMPDATA;
+  const lookbackDays = 3;
 
   let date = new Date();
   let responseData = new Array();
 
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < lookbackDays; i++) {
     let prefix = date.toISOString().slice(0, 10);
     console.log('[LOG] Querying for ' + prefix);
     const result = await data.list({ prefix: prefix });
