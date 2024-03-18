@@ -22,6 +22,11 @@
 </head>
 
 <body>
+  <div id="dashboard">
+    <div id="tempVal">0</div>
+    <div id="humidityVal">0</div>
+  </div>
+
   <div>
     <canvas id="tempChart"></canvas>
   </div>
@@ -30,11 +35,13 @@
     <canvas id="humidityChart"></canvas>
   </div>
 
+  <div id="dateDetail">
+    Last updated: <span id="lastUpdateVal">0/0/0</span>
+    <button id="refreshButton" onclick="fetchData();">Refresh</button>
+  </div>
+
   <script>
-    fetch("readweather")
-      .then(resp => resp.json())
-      .then(data => updateChart(data))
-      .catch(error => console.error('Error fetching data:', error));
+    fetchData();
   </script>
 </body>
 

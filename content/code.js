@@ -1,12 +1,19 @@
-function updateChart(data) {
+function updateUI(data) {
     const tempChartElement = document.getElementById('tempChart');
     const humidityChartElement = document.getElementById('humidityChart');
+    const tempValElement = document.getElementById('tempVal');
+    const humidityValElement = document.getElementById('humidityVal');
+    const dateValElement = document.getElementById('lastUpdateVal');
     data.sort((x, y) => x.d.localeCompare(y.d));
 
     // Use 'Z' to force parsing as UTC so conversion to local time works.
     const labels = data.map(x => new Date(x.d + 'Z'));
     const tempData = data.map(x => x.t);
     const humidData = data.map(x => x.h);
+
+    dateValElement.innerText = labels.slice(-1).toLocaleString("en-US");
+    tempValElement.innerText = tempData.slice(-1) + '\u00B0';
+    humidityValElement.innerText = humidData.slice(-1) + '%';
 
     const color = Chart.helpers.color;
     const chartColors = {
@@ -141,4 +148,11 @@ function updateChart(data) {
             }
         }
     });
+}
+
+function fetchData() {
+    fetch("readweather")
+        .then(resp => resp.json())
+        .then(data => updateUI(data))
+        .catch(error => console.error('Error fetching data:', error));
 }
