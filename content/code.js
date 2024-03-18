@@ -74,7 +74,7 @@ function updateUI(data) {
                     },
                 },
                 y: {
-                    grace: 5,
+                    grace: 2,
                     grid: {
                         color: [chartColors.Lines],
                     },
@@ -137,7 +137,7 @@ function updateUI(data) {
                     },
                 },
                 y: {
-                    grace: 5,
+                    grace: 2,
                     grid: {
                         color: [chartColors.Lines],
                     },
