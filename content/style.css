@@ -7,19 +7,38 @@ canvas {
     margin-bottom: 2em;
 }
 
-#dashboard {
-    color: white;
-    font: 24px sans-serif;
-    width: 100%;
+.vgroup {
+    display: block;
+    align-items: center;
+    justify-content: center;
+    margin: 1em;
+}
+
+.vgroup .vitem {
+    margin: 1em;
+    display: block;
+}
+
+.hgroup {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
 }
 
-#dashboard div {
-    margin: 1em;
+.hgroup .hitem {
+    margin: .25em .5em;
     display: inline-flex;
+}
+
+#dashboard {
+    color: white;
+    font: 24px sans-serif;
+    width: 100%;
+}
+
+.loc {
+    font-size: 14px;
+    text-align: center;
 }
 
 #dateDetail {

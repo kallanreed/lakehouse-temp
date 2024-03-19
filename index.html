@@ -2,29 +2,42 @@
 <html lang="en">
 
 <head>
-    <!-- Shout out to http://www.marcofolio.net/webdesign/build_native-looking_apps_for_ios.html -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="white" />
-    <meta name="description" content="Lakehouse Temperature - Live monitoring of indoor temperature.">
-    <meta name="keywords" content="lakehouse,temperature">
-    <meta name="author" content="Kyle Reed">
-    <meta charset="UTF-8">
-    <link rel="apple-touch-icon" href="content/icon.png" />
-    <link rel="icon" href="content/icon.png" />
-    <link rel="stylesheet" type="text/css" href="content/style.css" />
+  <!-- Shout out to http://www.marcofolio.net/webdesign/build_native-looking_apps_for_ios.html -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+  <meta name="description" content="Lakehouse Temperature - Live monitoring of indoor temperature.">
+  <meta name="keywords" content="lakehouse,temperature">
+  <meta name="author" content="Kyle Reed">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" href="content/icon.png" />
+  <link rel="icon" href="content/icon.png" />
+  <link rel="stylesheet" type="text/css" href="content/style.css" />
 
-    <title>Lakehouse Temperature</title>
+  <title>Lakehouse Temperature</title>
 
-    <script src="content/code.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+  <script src="content/code.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 </head>
 
 <body>
-  <div id="dashboard">
-    <div id="tempVal">0</div>
-    <div id="humidityVal">0</div>
+  <div id="dashboard" class="hgroup">
+    <div class="vgroup">
+      <div class="loc" class="vitem">Indoor</div>
+      <div class="hgroup" class="vitem">
+        <div id="tempInVal" class="hitem">70</div>
+        <div id="humidityInVal" class="hitem">40</div>
+      </div>
+    </div>
+    <div class="vgroup">
+      <div class="loc" class="vitem">Outdoor</div>
+      <div class="hgroup" class="vitem">
+        <div id="tempOutVal" class="hitem">55</div>
+        <div id="humidityOutVal" class="hitem">85</div>
+      </div>
+    </div>
   </div>
 
   <div>

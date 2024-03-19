@@ -1,6 +1,6 @@
 export async function onRequest(context) {
   const data = context.env.TEMPDATA;
-  const lookbackDays = 3;
+  const lookbackDays = 4;
 
   let date = new Date();
   let responseData = new Array();
@@ -20,7 +20,9 @@ export async function onRequest(context) {
       responseData.push({
         d: i.name,
         t: i.metadata.t,
-        h: i.metadata.h
+        h: i.metadata.h,
+        to: i.metadata.to,
+        ho: i.metadata.ho,
       });
     }
 

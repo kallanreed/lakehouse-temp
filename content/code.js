@@ -1,24 +1,32 @@
 function updateUI(data) {
     const tempChartElement = document.getElementById('tempChart');
     const humidityChartElement = document.getElementById('humidityChart');
-    const tempValElement = document.getElementById('tempVal');
-    const humidityValElement = document.getElementById('humidityVal');
+    const tempInValElement = document.getElementById('tempInVal');
+    const humidityInValElement = document.getElementById('humidityInVal');
+    const tempOutValElement = document.getElementById('tempOutVal');
+    const humidityOutValElement = document.getElementById('humidityOutVal');
     const dateValElement = document.getElementById('lastUpdateVal');
     data.sort((x, y) => x.d.localeCompare(y.d));
 
     // Use 'Z' to force parsing as UTC so conversion to local time works.
     const labels = data.map(x => new Date(x.d + 'Z'));
-    const tempData = data.map(x => x.t);
-    const humidData = data.map(x => x.h);
+    const tempInData = data.map(x => x.t);
+    const humidInData = data.map(x => x.h);
+    const tempOutData = data.map(x => x.to);
+    const humidOutData = data.map(x => x.ho);
 
     dateValElement.innerText = labels.slice(-1).toLocaleString("en-US");
-    tempValElement.innerText = tempData.slice(-1) + '\u00B0';
-    humidityValElement.innerText = humidData.slice(-1) + '%';
+    tempInValElement.innerText = tempInData.slice(-1) + '\u00B0';
+    humidityInValElement.innerText = humidInData.slice(-1) + '%';
+    tempOutValElement.innerText = tempOutData.slice(-1) + '\u00B0';
+    humidityOutValElement.innerText = humidOutData.slice(-1) + '%';
 
     const color = Chart.helpers.color;
     const chartColors = {
-        Temp: 'rgb(244,91,105)',
-        Humid: 'rgb(172, 193, 215)',
+        TempIn: 'rgb(244,91,105)',
+        TempOut: 'rgb(224, 127, 58)',
+        HumidIn: 'rgb(172, 193, 215)',
+        HumidOut: 'rgb(43, 215, 224)',
         Lables: 'rgb(228, 228, 225)',
         Lines: 'rgba(228, 228, 225, 0.2)',
     };
@@ -28,10 +36,17 @@ function updateUI(data) {
         data: {
             labels: labels,
             datasets: [{
-                label: 'Temperature',
-                data: tempData,
-                backgroundColor: color(chartColors.Temp).alpha(0.2).rgbString(),
-                borderColor: color(chartColors.Temp).rgbString(),
+                label: 'Temperature Indoor',
+                data: tempInData,
+                backgroundColor: color(chartColors.TempIn).alpha(0.2).rgbString(),
+                borderColor: color(chartColors.TempIn).rgbString(),
+                yAxisID: 'y1',
+            }, {
+                label: 'Temperature Outdoor',
+                data: tempOutData,
+                backgroundColor: color(chartColors.TempOut).alpha(0.2).rgbString(),
+                borderColor: color(chartColors.TempOut).rgbString(),
+                yAxisID: 'y2',
             }]
         },
         options: {
@@ -73,14 +88,25 @@ function updateUI(data) {
                         color: chartColors.Lables,
                     },
                 },
-                y: {
-                    grace: 2,
+                y1: {
+                    grace: 1,
                     grid: {
                         color: [chartColors.Lines],
                     },
                     ticks: {
                         color: chartColors.Lables,
                     },
+                    position: 'left'
+                },
+                y2: {
+                    grace: 1,
+                    grid: {
+                        color: [chartColors.Lines],
+                    },
+                    ticks: {
+                        color: chartColors.Lables,
+                    },
+                    position: 'right'
                 }
             }
         }
@@ -91,10 +117,17 @@ function updateUI(data) {
         data: {
             labels: labels,
             datasets: [{
-                label: 'Humidity',
-                data: humidData,
-                backgroundColor: color(chartColors.Humid).alpha(0.2).rgbString(),
-                borderColor: color(chartColors.Humid).rgbString(),
+                label: 'Humidity Indoor',
+                data: humidInData,
+                backgroundColor: color(chartColors.HumidIn).alpha(0.2).rgbString(),
+                borderColor: color(chartColors.HumidIn).rgbString(),
+                yAxisID: 'y1',
+            }, {
+                label: 'Humidity Outdoor',
+                data: humidOutData,
+                backgroundColor: color(chartColors.HumidOut).alpha(0.2).rgbString(),
+                borderColor: color(chartColors.HumidOut).rgbString(),
+                yAxisID: 'y2',
             }]
         },
         options: {
@@ -136,14 +169,25 @@ function updateUI(data) {
                         color: chartColors.Lables,
                     },
                 },
-                y: {
-                    grace: 2,
+                y1: {
+                    grace: 1,
                     grid: {
                         color: [chartColors.Lines],
                     },
                     ticks: {
                         color: chartColors.Lables,
                     },
+                    position: 'left'
+                },
+                y2: {
+                    grace: 1,
+                    grid: {
+                        color: [chartColors.Lines],
+                    },
+                    ticks: {
+                        color: chartColors.Lables,
+                    },
+                    position: 'right'
                 }
             }
         }

@@ -13,15 +13,19 @@ export async function onRequest(context) {
   }
 
   const date = params.get('dateutc');
-  const temp = Number(params.get('tempinf'));
-  const humidity = Number(params.get('humidityin'));
+  const tempIn = Number(params.get('tempinf'));
+  const humidityIn = Number(params.get('humidityin'));
+  const tempOut = Number(params.get('tempf'));
+  const humidityOut = Number(params.get('humidity'));
 
   console.log('[LOG] Date:' + date);
-  console.log('[LOG] Temp:' + temp);
-  console.log('[LOG] Humi:' + humidity);
+  console.log('[LOG] TempIn:' + tempIn);
+  console.log('[LOG] HumiIn:' + humidityIn);
+  console.log('[LOG] TempOut:' + tempOut);
+  console.log('[LOG] HumiOut:' + humidityOut);
 
   await data.put(date, "", {
-      metadata: { t: temp, h: humidity },
+      metadata: { t: tempIn, h: humidityIn, to: tempOut, ho: humidityOut },
       expirationTtl: 2592000  // 1 month
     });
 
