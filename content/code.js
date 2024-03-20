@@ -1,3 +1,6 @@
+var tempChart;
+var humidityChart;
+
 function updateUI(data) {
     const tempChartElement = document.getElementById('tempChart');
     const humidityChartElement = document.getElementById('humidityChart');
@@ -31,167 +34,179 @@ function updateUI(data) {
         Lines: 'rgba(228, 228, 225, 0.2)',
     };
 
-    new Chart(tempChartElement, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Temperature Indoor',
-                data: tempInData,
-                backgroundColor: color(chartColors.TempIn).alpha(0.2).rgbString(),
-                borderColor: color(chartColors.TempIn).rgbString(),
-                yAxisID: 'y1',
-            }, {
-                label: 'Temperature Outdoor',
-                data: tempOutData,
-                backgroundColor: color(chartColors.TempOut).alpha(0.2).rgbString(),
-                borderColor: color(chartColors.TempOut).rgbString(),
-                yAxisID: 'y2',
-            }]
-        },
-        options: {
-            plugins: {
-                title: {
-                    text: "Temperature",
-                    display: true,
-                    color: chartColors.Lables
-                },
-                legend: {
-                    display: false
-                },
-                decimation: {
-                    enabled: true,
-                    algorithm: 'lttb'
-                }
+    if (tempChart === undefined) {
+        tempChart = new Chart(tempChartElement, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Temperature Indoor',
+                    data: tempInData,
+                    backgroundColor: color(chartColors.TempIn).alpha(0.2).rgbString(),
+                    borderColor: color(chartColors.TempIn).rgbString(),
+                    yAxisID: 'y1',
+                }, {
+                    label: 'Temperature Outdoor',
+                    data: tempOutData,
+                    backgroundColor: color(chartColors.TempOut).alpha(0.2).rgbString(),
+                    borderColor: color(chartColors.TempOut).rgbString(),
+                    yAxisID: 'y2',
+                }]
             },
-            elements: {
-                point: {
-                    pointStyle: false
-                }
-            },
-            layout: {
-                padding: 10
-            },
-            scales: {
-                x: {
-                    grid: {
-                        color: [chartColors.Lines],
+            options: {
+                plugins: {
+                    title: {
+                        text: "Temperature",
+                        display: true,
+                        color: chartColors.Lables
                     },
-                    type: 'time',
-                    time: {
-                        unit: 'hour',
-                        displayFormats: {
-                            hour: "M/d HH"
-                        }
+                    legend: {
+                        display: false
                     },
-                    ticks: {
-                        color: chartColors.Lables,
-                    },
+                    decimation: {
+                        enabled: true,
+                        algorithm: 'lttb'
+                    }
                 },
-                y1: {
-                    grace: 1,
-                    grid: {
-                        color: [chartColors.Lines],
-                    },
-                    ticks: {
-                        color: chartColors.Lables,
-                    },
-                    position: 'left'
+                elements: {
+                    point: {
+                        pointStyle: false
+                    }
                 },
-                y2: {
-                    grace: 1,
-                    grid: {
-                        color: [chartColors.Lines],
+                layout: {
+                    padding: 10
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            color: [chartColors.Lines],
+                        },
+                        type: 'time',
+                        time: {
+                            unit: 'hour',
+                            displayFormats: {
+                                hour: "M/d HH"
+                            }
+                        },
+                        ticks: {
+                            color: chartColors.Lables,
+                        },
                     },
-                    ticks: {
-                        color: chartColors.Lables,
+                    y1: {
+                        grace: 1,
+                        grid: {
+                            color: [chartColors.Lines],
+                        },
+                        ticks: {
+                            color: chartColors.Lables,
+                        },
+                        position: 'left'
                     },
-                    position: 'right'
+                    y2: {
+                        grace: 1,
+                        grid: {
+                            color: [chartColors.Lines],
+                        },
+                        ticks: {
+                            color: chartColors.Lables,
+                        },
+                        position: 'right'
+                    }
                 }
             }
-        }
-    });
+        });
+    } else {
+        tempChart.data.datasets[0].data = tempInData;
+        tempChart.data.datasets[1].data = tempOutData;
+        tempChart.update();
+    }
 
-    new Chart(humidityChartElement, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Humidity Indoor',
-                data: humidInData,
-                backgroundColor: color(chartColors.HumidIn).alpha(0.2).rgbString(),
-                borderColor: color(chartColors.HumidIn).rgbString(),
-                yAxisID: 'y1',
-            }, {
-                label: 'Humidity Outdoor',
-                data: humidOutData,
-                backgroundColor: color(chartColors.HumidOut).alpha(0.2).rgbString(),
-                borderColor: color(chartColors.HumidOut).rgbString(),
-                yAxisID: 'y2',
-            }]
-        },
-        options: {
-            plugins: {
-                title: {
-                    text: "Humidity",
-                    display: true,
-                    color: chartColors.Lables
-                },
-                legend: {
-                    display: false
-                },
-                decimation: {
-                    enabled: true,
-                    algorithm: 'lttb'
-                }
+    if (humidityChart === undefined) {
+        humidityChart = new Chart(humidityChartElement, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Humidity Indoor',
+                    data: humidInData,
+                    backgroundColor: color(chartColors.HumidIn).alpha(0.2).rgbString(),
+                    borderColor: color(chartColors.HumidIn).rgbString(),
+                    yAxisID: 'y1',
+                }, {
+                    label: 'Humidity Outdoor',
+                    data: humidOutData,
+                    backgroundColor: color(chartColors.HumidOut).alpha(0.2).rgbString(),
+                    borderColor: color(chartColors.HumidOut).rgbString(),
+                    yAxisID: 'y2',
+                }]
             },
-            elements: {
-                point: {
-                    pointStyle: false
-                }
-            },
-            layout: {
-                padding: 10
-            },
-            scales: {
-                x: {
-                    grid: {
-                        color: [chartColors.Lines],
+            options: {
+                plugins: {
+                    title: {
+                        text: "Humidity",
+                        display: true,
+                        color: chartColors.Lables
                     },
-                    type: 'time',
-                    time: {
-                        unit: 'hour',
-                        displayFormats: {
-                            hour: "M/d HH"
-                        }
+                    legend: {
+                        display: false
                     },
-                    ticks: {
-                        color: chartColors.Lables,
-                    },
+                    decimation: {
+                        enabled: true,
+                        algorithm: 'lttb'
+                    }
                 },
-                y1: {
-                    grace: 1,
-                    grid: {
-                        color: [chartColors.Lines],
-                    },
-                    ticks: {
-                        color: chartColors.Lables,
-                    },
-                    position: 'left'
+                elements: {
+                    point: {
+                        pointStyle: false
+                    }
                 },
-                y2: {
-                    grace: 1,
-                    grid: {
-                        color: [chartColors.Lines],
+                layout: {
+                    padding: 10
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            color: [chartColors.Lines],
+                        },
+                        type: 'time',
+                        time: {
+                            unit: 'hour',
+                            displayFormats: {
+                                hour: "M/d HH"
+                            }
+                        },
+                        ticks: {
+                            color: chartColors.Lables,
+                        },
                     },
-                    ticks: {
-                        color: chartColors.Lables,
+                    y1: {
+                        grace: 1,
+                        grid: {
+                            color: [chartColors.Lines],
+                        },
+                        ticks: {
+                            color: chartColors.Lables,
+                        },
+                        position: 'left'
                     },
-                    position: 'right'
+                    y2: {
+                        grace: 1,
+                        grid: {
+                            color: [chartColors.Lines],
+                        },
+                        ticks: {
+                            color: chartColors.Lables,
+                        },
+                        position: 'right'
+                    }
                 }
             }
-        }
-    });
+        });
+    } else {
+        humidityChart.data.datasets[0].data = humidInData;
+        humidityChart.data.datasets[1].data = humidOutData;
+        humidityChart.update();
+    }
 }
 
 function fetchData() {
