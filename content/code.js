@@ -1,5 +1,5 @@
-var tempChart;
-var humidityChart;
+var tempChart = undefined;
+var humidityChart = undefined;
 
 function updateUI(data) {
     const tempChartElement = document.getElementById('tempChart');
@@ -116,6 +116,7 @@ function updateUI(data) {
             }
         });
     } else {
+        tempChart.data.labels = labels;
         tempChart.data.datasets[0].data = tempInData;
         tempChart.data.datasets[1].data = tempOutData;
         tempChart.update();
@@ -203,6 +204,7 @@ function updateUI(data) {
             }
         });
     } else {
+        humidityChart.data.labels = labels;
         humidityChart.data.datasets[0].data = humidInData;
         humidityChart.data.datasets[1].data = humidOutData;
         humidityChart.update();
