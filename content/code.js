@@ -31,7 +31,8 @@ function updateUI(data) {
         HumidIn: 'rgb(172, 193, 215)',
         HumidOut: 'rgb(43, 215, 224)',
         Lables: 'rgb(228, 228, 225)',
-        Lines: 'rgba(228, 228, 225, 0.2)',
+        Lines: 'rgba(220, 220, 220, 0.2)',
+        Lines2: 'rgba(157, 234, 251, 0.2)',
     };
 
     if (tempChart === undefined) {
@@ -44,16 +45,19 @@ function updateUI(data) {
                     data: tempInData,
                     backgroundColor: color(chartColors.TempIn).alpha(0.2).rgbString(),
                     borderColor: color(chartColors.TempIn).rgbString(),
+                    borderWidth: 1.5,
                     yAxisID: 'y1',
                 }, {
                     label: 'Temperature Outdoor',
                     data: tempOutData,
                     backgroundColor: color(chartColors.TempOut).alpha(0.2).rgbString(),
                     borderColor: color(chartColors.TempOut).rgbString(),
+                    borderWidth: 1.5,
                     yAxisID: 'y2',
                 }]
             },
             options: {
+                aspectRatio: 1.5,
                 plugins: {
                     title: {
                         text: "Temperature",
@@ -105,7 +109,7 @@ function updateUI(data) {
                     y2: {
                         grace: 1,
                         grid: {
-                            color: [chartColors.Lines],
+                            color: [chartColors.Lines2],
                         },
                         ticks: {
                             color: chartColors.Lables,
@@ -132,16 +136,19 @@ function updateUI(data) {
                     data: humidInData,
                     backgroundColor: color(chartColors.HumidIn).alpha(0.2).rgbString(),
                     borderColor: color(chartColors.HumidIn).rgbString(),
+                    borderWidth: 1.5,
                     yAxisID: 'y1',
                 }, {
                     label: 'Humidity Outdoor',
                     data: humidOutData,
                     backgroundColor: color(chartColors.HumidOut).alpha(0.2).rgbString(),
                     borderColor: color(chartColors.HumidOut).rgbString(),
+                    borderWidth: 1.5,
                     yAxisID: 'y2',
                 }]
             },
             options: {
+                aspectRatio: 1.5,
                 plugins: {
                     title: {
                         text: "Humidity",
@@ -193,7 +200,7 @@ function updateUI(data) {
                     y2: {
                         grace: 1,
                         grid: {
-                            color: [chartColors.Lines],
+                            color: [chartColors.Lines2],
                         },
                         ticks: {
                             color: chartColors.Lables,
